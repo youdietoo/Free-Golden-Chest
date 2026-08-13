@@ -5,11 +5,14 @@ GOLDEN_KEY_CURRENCY = 3
 
 @hook("WillowGame.WillowInteractiveObject:Behavior_ChangeUsabilityCost", Type.PRE)
 def change_cost(obj, args, ret, func):
-    if int(args.CostType) == GOLDEN_KEY_CURRENCY:
-        args.CostAmount = 0
-        args.CostType = 0
-        args.ChangeType = 0
+    try:
+        if int(args.CostType) == GOLDEN_KEY_CURRENCY:
+            args.CostAmount = 0
+            args.CostType = 0
+            args.ChangeType = 0
 
-        return Block
+            return Block
+    except Exception as e:
+        print(f"Error in change_cost: {e}")
 
 mod = build_mod()
